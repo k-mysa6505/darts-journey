@@ -75,79 +75,26 @@ class JapanDartGame {
 
         // 日本地図の初期化
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 37.50, lng: 138.25 }, // 設計書通りの中心座標
-            zoom: 4.5, // 設計書通りのズーム
+            center: { lat: 37.50, lng: 138.25 }, // 中心座標
+            zoom: 4.4,
             disableDefaultUI: true, // デフォルトUIを無効化
             draggable: false, // ドラッグを無効化
             scrollwheel: false, // スクロールズームを無効化
-            disableDoubleClickZoom: true, // ダブルクリックズームを無効化
-            styles: this.getMapStyles(), // 日本以外を隠すスタイル
-            mapId: "japan-map"
+            disableDoubleClickZoom: true,
+            mapId: "f6fdaa66c37122753343cab5"
         });
     }
 
     loadGoogleMapsAPI() {
         return new Promise((resolve, reject) => {
             const script = document.createElement('script');
-            script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=geometry,marker`;
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}&libraries=geometry,marker&v=beta`;
             script.async = true;
             script.defer = true;
             script.onload = resolve;
             script.onerror = reject;
             document.head.appendChild(script);
         });
-    }
-
-    getMapStyles() {
-        // 日本以外の国を水域と同じ色で隠すスタイル
-        return [
-            {
-                "featureType": "administrative.country",
-                "elementType": "geometry.fill",
-                "stylers": [
-                    {
-                        "color": "#4285f4" // 水域と同じ青色
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.country",
-                "elementType": "geometry.stroke",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#4285f4"
-                    }
-                ]
-            },
-            {
-                "featureType": "landscape",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#e5e3df"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.province",
-                "elementType": "geometry.stroke",
-                "stylers": [
-                    {
-                        "color": "#8ab4b4",
-                        "weight": 1
-                    }
-                ]
-            }
-        ];
     }
 
     setupDartControls() {
