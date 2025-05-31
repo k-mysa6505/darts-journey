@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日本列島ダーツの旅</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="map"></div>
+    <img id="dart" src="dart.png" alt="ダーツ">
+
+    <div id="result-overlay">
+        <p id="result-text"></p>
+        <button id="reset-button">もう一度投げる</button>
+    </div>
+
+    <div id="api-key-missing-message" class="message-overlay">
+        <div class="message-content">
+            <h2>APIキーが必要です</h2>
+            <p>アプリケーションを実行するには、Google Maps Platform APIキーが必要です。<br>
+            プロジェクトのルートディレクトリに **`secrets.json`** ファイルを作成し、APIキーを記入してください。</p>
+            <pre><code>{
+                "Maps_API_KEY": "YOUR_ACTUAL_Maps_API_KEY"
+            }</code></pre>
+            <p>APIキーの取得方法と設定については、<a href="https://developers.google.com/maps/gmp-get-started" target="_blank" rel="noopener noreferrer">Google Maps Platform公式ドキュメント</a>をご参照ください。<br>
+            Maps JavaScript APIとGeocoding APIを有効にし、**HTTPリファラー制限を設定**してください。</p>
+            <button id="reload-button">再読み込み</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
