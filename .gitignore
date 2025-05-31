@@ -1,1 +1,2 @@
-secrets.json    // APIキーを公開しないようにするために
+# APIキーを含むファイルを無視する
+secrets.json
