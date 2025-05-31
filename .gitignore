@@ -1,2 +1,2 @@
 # APIキーを含むファイルを無視する
-secrets.json
+json/secrets.json

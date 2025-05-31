@@ -7,25 +7,53 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="map"></div>
-    <img id="dart" src="images/dart.png" alt="ダーツ">
-
-    <div id="result-overlay">
-        <p id="result-text"></p>
-        <button id="reset-button">もう一度投げる</button>
+    <div class="api-notice" id="apiNotice">
+        <strong>APIキーが設定されていません</strong><br>
+        json/secrets.json ファイルにGoogle Maps APIキーを設定してください
     </div>
 
-    <div id="api-key-missing-message" class="message-overlay">
-        <div class="message-content">
-            <h2>APIキーが必要です</h2>
-            <p>アプリケーションを実行するには、Google Maps Platform APIキーが必要です。<br>
-            プロジェクトのルートディレクトリに **`secrets.json`** ファイルを作成し、APIキーを記入してください。</p>
-            <pre><code>{
-                "Maps_API_KEY": "YOUR_ACTUAL_Maps_API_KEY"
-            }</code></pre>
-            <p>APIキーの取得方法と設定については、<a href="https://developers.google.com/maps/gmp-get-started" target="_blank" rel="noopener noreferrer">Google Maps Platform公式ドキュメント</a>をご参照ください。<br>
-            Maps JavaScript APIとGeocoding APIを有効にし、**HTTPリファラー制限を設定**してください。</p>
-            <button id="reload-button">再読み込み</button>
+    <div class="title">
+        <h1>日本列島</h1>
+        <h1>ダーツの旅</h1>
+    </div>
+
+    <div class="game-container">
+        <!-- ダーツボードのリング -->
+        <div class="dartboard-rings">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+
+        <!-- ダーツボード数字 -->
+        <div class="dartboard-numbers" id="dartboardNumbers"></div>
+
+        <!-- 地図コンテナ -->
+        <div class="map-container">
+            <div id="map"></div>
+        </div>
+
+        <!-- ダーツ -->
+        <div class="dart" id="dart">
+            <div class="dart-body"></div>
+            <div class="dart-tip"></div>
+            <div class="dart-flights">
+                <div class="dart-flight"></div>
+                <div class="dart-flight"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <p>ダーツをドラッグして投げてください</p>
+    </div>
+
+    <!-- 結果表示オーバーレイ -->
+    <div class="result-overlay" id="resultOverlay">
+        <div class="result-content">
+            <h2>命中！</h2>
+            <p id="resultText">結果を表示中...</p>
+            <button class="close-button" onclick="closeResult()">もう一度投げる</button>
         </div>
     </div>
 
