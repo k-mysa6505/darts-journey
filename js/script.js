@@ -77,11 +77,11 @@ class JapanDartGame {
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 37.50, lng: 138.25 }, // 中心座標
             zoom: 4.4,
-            disableDefaultUI: true, // デフォルトUIを無効化
-            draggable: false, // ドラッグを無効化
-            scrollwheel: false, // スクロールズームを無効化
+            disableDefaultUI: true,
+            draggable: false,
+            scrollwheel: false,
             disableDoubleClickZoom: true,
-            mapId: "f6fdaa66c37122753343cab5"
+            mapId: "f6fdaa66c37122753343cab5"   // カスタムマップID
         });
     }
 
@@ -131,6 +131,9 @@ class JapanDartGame {
         const deltaX = clientX - this.startPos.x;
         const deltaY = clientY - this.startPos.y;
 
+        //  ダーツ位置をログに出力
+        console.log(`Dart position: (${deltaX}, ${deltaY})`);
+
         this.dart.style.transform = `translateX(calc(-50% + ${deltaX}px)) translateY(${deltaY}px)`;
     }
 
@@ -150,22 +153,20 @@ class JapanDartGame {
         const deltaY = this.currentPos.y - this.startPos.y;
         const force = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY) / 5, 50);
 
-        // ランダムな命中地点を生成（日本の範囲内）
-        const hitPoint = this.generateRandomHitPoint();
+        // 投げる方向・力をログに出力
+        console.log(`Throwing dart with force: ${force} (DeltaX: ${deltaX}, DeltaY: ${deltaY})`);
+
+        // ダーツの位置にピンを設定
+        const hitPoint = {
+            lat: 37.50 + (deltaY / 1000), // 仮の計算式、実際の地図に合わせて調整が必要
+            lng: 138.25 + (deltaX / 1000)  // 仮の計算式、実際の地図に合わせて調整が必要
+        };
 
         // アニメーション
         await this.animateDartThrow(hitPoint);
 
         // 結果を表示
         await this.showResult(hitPoint);
-    }
-
-    generateRandomHitPoint() {
-        // 日本の大まかな範囲内でランダムな座標を生成
-        const lat = 30 + Math.random() * 15; // 30-45度
-        const lng = 129 + Math.random() * 16; // 129-145度
-
-        return { lat, lng };
     }
 
     async animateDartThrow(hitPoint) {

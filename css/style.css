@@ -57,7 +57,7 @@ body {
     width: 93%;
     height: 93%;
     background: repeating-conic-gradient(
-        from 9deg,
+        from -9deg,
         #ff0000b7 0deg 18deg,
         #08490c 18deg 36deg
     );
